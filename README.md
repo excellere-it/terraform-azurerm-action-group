@@ -1,29 +1,22 @@
-# Key Vaults
+# Azure Monitor Action Group
 
-Creates an Azure Key Vault using RBAC mode.
-- [Key Vaults](#key-vaults)
+Create an action group in Azure Monitor that can be used to configure how alerts are handled.
+
+- [Azure Monitor Action Group](#azure-monitor-action-group)
   - [Example](#example)
   - [Required Inputs](#required-inputs)
-    - [ log\_analytics\_workspace\_id](#-log_analytics_workspace_id)
+    - [ display\_name](#-display_name)
     - [ name](#-name)
-    - [ private\_endpoint](#-private_endpoint)
     - [ resource\_group](#-resource_group)
-    - [ tenant\_id](#-tenant_id)
   - [Optional Inputs](#optional-inputs)
-    - [ enabled\_for\_disk\_encryption](#-enabled_for_disk_encryption)
     - [ expiration\_days](#-expiration_days)
-    - [ network\_acls](#-network_acls)
     - [ optional\_tags](#-optional_tags)
-    - [ testing](#-testing)
   - [Outputs](#outputs)
-    - [ id](#-id)
   - [Resources](#resources)
   - [Requirements](#requirements)
   - [Providers](#providers)
   - [Modules](#modules)
-    - [ diagnostics](#-diagnostics)
     - [ name](#-name-1)
-    - [ private\_endpoint](#-private_endpoint-1)
   - [Update Docs](#update-docs)
 
 <!-- BEGIN_TF_DOCS -->
@@ -48,58 +41,19 @@ resource "azurerm_resource_group" "example" {
   tags     = local.tags
 }
 
-resource "azurerm_log_analytics_workspace" "example" {
-  location            = azurerm_resource_group.example.location
-  name                = "la-${local.test_namespace}"
-  resource_group_name = azurerm_resource_group.example.name
-  retention_in_days   = 30
-  sku                 = "PerGB2018"
-  tags                = local.tags
-}
-
-resource "azurerm_virtual_network" "example" {
-  address_space       = ["192.168.0.0/24"]
-  location            = azurerm_resource_group.example.location
-  name                = "vnet-${local.test_namespace}"
-  resource_group_name = azurerm_resource_group.example.name
-  tags                = local.tags
-}
-
-resource "azurerm_subnet" "example" {
-  address_prefixes     = [cidrsubnet(azurerm_virtual_network.example.address_space.0, 1, 0)]
-  name                 = "vault"
-  resource_group_name  = azurerm_resource_group.example.name
-  virtual_network_name = azurerm_virtual_network.example.name
-}
-
-resource "azurerm_private_dns_zone" "example" {
-  name                = "privatelink.vaultcore.azure.net"
-  resource_group_name = azurerm_resource_group.example.name
-  tags                = local.tags
-}
-
 module "example" {
   source = "../.."
 
-  log_analytics_workspace_id = azurerm_log_analytics_workspace.example.id
-  resource_group             = azurerm_resource_group.example
-  tenant_id                  = data.azurerm_client_config.current.tenant_id
-  testing                    = true
+  display_name   = "DoNothing"
+  resource_group = azurerm_resource_group.example
 
   name = {
     contact     = "nobody@dell.org"
     environment = "sbx"
     instance    = 0
     program     = "dyl"
-    repository  = "terraform-azurerm-key-vault"
+    repository  = "terraform-azurerm-action-group"
     workload    = "apps"
-  }
-
-  private_endpoint = {
-    subnet_id = azurerm_subnet.example.id
-    subresource = {
-      vault = [azurerm_private_dns_zone.example.id]
-    }
   }
 }
 ```
@@ -108,9 +62,9 @@ module "example" {
 
 The following input variables are required:
 
-### <a name="input_log_analytics_workspace_id"></a> [log\_analytics\_workspace\_id](#input\_log\_analytics\_workspace\_id)
+### <a name="input_display_name"></a> [display\_name](#input\_display\_name)
 
-Description: The workspace to write logs into.
+Description: The display name of the action group.
 
 Type: `string`
 
@@ -131,19 +85,6 @@ object({
   })
 ```
 
-### <a name="input_private_endpoint"></a> [private\_endpoint](#input\_private\_endpoint)
-
-Description: The private endpoint configuration.
-
-Type:
-
-```hcl
-object({
-    subnet_id   = string
-    subresource = map(list(string))
-  })
-```
-
 ### <a name="input_resource_group"></a> [resource\_group](#input\_resource\_group)
 
 Description: The resource group to deploy resources into
@@ -156,12 +97,6 @@ object({
     name     = string
   })
 ```
-
-### <a name="input_tenant_id"></a> [tenant\_id](#input\_tenant\_id)
-
-Description: The Azure Active Directory tenant ID that should be used for authenticating requests to the key vault.
-
-Type: `string`
 
 ## Optional Inputs
 
@@ -183,27 +118,15 @@ Type: `map(string)`
 
 Default: `{}`
 
-### <a name="input_testing"></a> [testing](#input\_testing)
-
-Description: Deploy Key Vault with options appropriate for testing.
-
-Type: `bool`
-
-Default: `false`
-
 ## Outputs
 
-The following outputs are exported:
-
-### <a name="output_id"></a> [id](#output\_id)
-
-Description: The Key Vault ID.
+No outputs.
 
 ## Resources
 
 The following resources are used by this module:
 
-- [azurerm_key_vault.vault](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/key_vault) (resource)
+- [azurerm_monitor_action_group.main](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/monitor_action_group) (resource)
 
 ## Requirements
 
@@ -223,23 +146,11 @@ The following providers are used by this module:
 
 The following Modules are called:
 
-### <a name="module_diagnostics"></a> [diagnostics](#module\_diagnostics)
-
-Source: app.terraform.io/dellfoundation/diagnostics/azurerm
-
-Version: 0.0.4
-
 ### <a name="module_name"></a> [name](#module\_name)
 
 Source: app.terraform.io/dellfoundation/namer/terraform
 
 Version: 0.0.5
-
-### <a name="module_private_endpoint"></a> [private\_endpoint](#module\_private\_endpoint)
-
-Source: app.terraform.io/dellfoundation/private-link/azurerm
-
-Version: 0.0.1
 <!-- END_TF_DOCS -->
 
 ## <a name='update-docs'></a>Update Docs

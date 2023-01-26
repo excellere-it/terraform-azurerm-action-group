@@ -1,4 +1,4 @@
-module github.com/msdf/terraform-azurerm-key-vault # TODO udpate repo name
+module github.com/msdf/terraform-azurerm-action-group
 
 go 1.18
 

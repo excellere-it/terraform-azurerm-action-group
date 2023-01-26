@@ -1,4 +1,4 @@
 output "id" {
-  description = "The Key Vault ID."
-  value       = azurerm_key_vault.vault.id
+  description = "The ID of the Action Group."
+  value       = azurerm_monitor_action_group.main.id
 }

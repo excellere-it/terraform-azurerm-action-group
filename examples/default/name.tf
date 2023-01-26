@@ -6,6 +6,6 @@ module "name" {
   environment = "sbx"
   location    = local.location
   program     = "dyl"
-# TODO update repo name  repository  = "terraform-azurerm-key-vault"
+  repository  = "terraform-azurerm-action-group"
   workload    = "apps"
 }

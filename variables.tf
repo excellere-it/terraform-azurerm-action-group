@@ -1,3 +1,13 @@
+variable "display_name" {
+  description = "The display name of the action group."
+  type        = string
+
+  validation {
+    condition     = 0 < length(var.display_name) && length(var.display_name) < 13
+    error_message = "Expected length of display_name to be in the range (1 - 12), got ${var.display_name}"
+  }
+}
+
 variable "expiration_days" {
   default     = 365
   description = "Used to calculate the value of the EndDate tag by adding the specified number of days to the CreateDate tag."
@@ -7,11 +17,6 @@ variable "expiration_days" {
     condition     = 0 < var.expiration_days
     error_message = "Expiration days must be greater than zero."
   }
-}
-
-variable "log_analytics_workspace_id" {
-  description = "The workspace to write logs into."
-  type        = string
 }
 
 variable "name" {
@@ -32,14 +37,6 @@ variable "optional_tags" {
   type        = map(string)
 }
 
-variable "private_endpoint" {
-  description = "The private endpoint configuration."
-  type = object({
-    subnet_id   = string
-    subresource = map(list(string))
-  })
-}
-
 variable "resource_group" {
   description = "The resource group to deploy resources into"
 
@@ -47,15 +44,4 @@ variable "resource_group" {
     location = string
     name     = string
   })
-}
-
-variable "tenant_id" {
-  description = "The Azure Active Directory tenant ID that should be used for authenticating requests to the key vault."
-  type        = string
-}
-
-variable "testing" {
-  default     = false
-  description = "Deploy Key Vault with options appropriate for testing."
-  type        = bool
 }
