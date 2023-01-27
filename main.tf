@@ -13,9 +13,8 @@ module "name" {
 }
 
 resource "azurerm_monitor_action_group" "main" {
-  name                = "ag-${module.name.resource_suffix}}"
+  name                = "ag-${module.name.resource_suffix}"
   resource_group_name = var.resource_group.name
   short_name          = var.display_name
   tags                = module.name.tags
 }
-

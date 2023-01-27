@@ -120,7 +120,11 @@ Default: `{}`
 
 ## Outputs
 
-No outputs.
+The following outputs are exported:
+
+### <a name="output_id"></a> [id](#output\_id)
+
+Description: The ID of the Action Group.
 
 ## Resources
 
