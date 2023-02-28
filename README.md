@@ -12,6 +12,7 @@ Create an action group in Azure Monitor that can be used to configure how alerts
     - [ expiration\_days](#-expiration_days)
     - [ optional\_tags](#-optional_tags)
   - [Outputs](#outputs)
+    - [ id](#-id)
   - [Resources](#resources)
   - [Requirements](#requirements)
   - [Providers](#providers)
@@ -20,7 +21,6 @@ Create an action group in Azure Monitor that can be used to configure how alerts
   - [Update Docs](#update-docs)
 
 <!-- BEGIN_TF_DOCS -->
-
 
 ## Example
 
@@ -154,7 +154,7 @@ The following Modules are called:
 
 Source: app.terraform.io/dellfoundation/namer/terraform
 
-Version: 0.0.5
+Version: 0.0.6
 <!-- END_TF_DOCS -->
 
 ## <a name='update-docs'></a>Update Docs
