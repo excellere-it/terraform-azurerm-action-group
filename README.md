@@ -22,6 +22,7 @@ Create an action group in Azure Monitor that can be used to configure how alerts
 
 <!-- BEGIN_TF_DOCS -->
 
+
 ## Example
 
 ```hcl
@@ -136,7 +137,7 @@ The following resources are used by this module:
 
 The following requirements are needed by this module:
 
-- <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) (~> 1.3.3)
+- <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) (~> 1.3)
 
 - <a name="requirement_azurerm"></a> [azurerm](#requirement\_azurerm) (~> 3.41)
 
@@ -154,7 +155,7 @@ The following Modules are called:
 
 Source: app.terraform.io/dellfoundation/namer/terraform
 
-Version: 0.0.6
+Version: 0.0.7
 <!-- END_TF_DOCS -->
 
 ## <a name='update-docs'></a>Update Docs

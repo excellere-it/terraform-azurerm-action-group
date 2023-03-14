@@ -1,6 +1,13 @@
+resource "azurerm_monitor_action_group" "main" {
+  name                = "ag-${module.name.resource_suffix}"
+  resource_group_name = var.resource_group.name
+  short_name          = var.display_name
+  tags                = module.name.tags
+}
+
 module "name" {
   source  = "app.terraform.io/dellfoundation/namer/terraform"
-  version = "0.0.6"
+  version = "0.0.7"
 
   contact       = var.name.contact
   environment   = var.name.environment
@@ -10,11 +17,4 @@ module "name" {
   program       = var.name.program
   repository    = var.name.repository
   workload      = var.name.workload
-}
-
-resource "azurerm_monitor_action_group" "main" {
-  name                = "ag-${module.name.resource_suffix}"
-  resource_group_name = var.resource_group.name
-  short_name          = var.display_name
-  tags                = module.name.tags
 }
