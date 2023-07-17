@@ -7,7 +7,7 @@ resource "azurerm_monitor_action_group" "main" {
 
 module "name" {
   source  = "app.terraform.io/dellfoundation/namer/terraform"
-  version = "0.0.7"
+  version = "0.0.8"
 
   contact       = var.name.contact
   environment   = var.name.environment
