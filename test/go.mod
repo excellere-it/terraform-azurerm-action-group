@@ -1,4 +1,4 @@
-module github.com/msdf/terraform-azurerm-action-group
+module github.com/infoex/terraform-azurerm-action-group
 
 go 1.18
 
