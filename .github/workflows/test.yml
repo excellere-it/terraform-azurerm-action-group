@@ -8,7 +8,6 @@ on:
     paths:
       - '**.tf'
       - 'test/**'
-      - 'tests/**'
       - '.github/workflows/test.yml'
   pull_request:
     branches:
@@ -17,7 +16,6 @@ on:
     paths:
       - '**.tf'
       - 'test/**'
-      - 'tests/**'
       - '.github/workflows/test.yml'
   workflow_dispatch:
 
@@ -62,24 +60,6 @@ jobs:
       - name: Terraform Validate
         run: terraform validate
 
-  # terraform-docs:
-  #   name: Terraform Docs Check
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - name: Checkout code
-  #       uses: actions/checkout@v4
-  #       with:
-  #         ref: ${{ github.event.pull_request.head.ref }}
-
-  #     - name: Render terraform docs
-  #       uses: terraform-docs/gh-actions@v1.2.0
-  #       with:
-  #         working-dir: .
-  #         output-file: README.md
-  #         output-method: inject
-  #         git-push: false
-  #         fail-on-diff: true
-
   security-scan:
     name: Security Scan
     runs-on: ubuntu-latest
@@ -104,12 +84,6 @@ jobs:
           name: security-scan-results
           path: results.sarif
           retention-days: 30
-
-      # - name: Upload SARIF file
-      #   uses: github/codeql-action/upload-sarif@v3
-      #   with:
-      #     sarif_file: results.sarif
-      #     category: checkov
 
   lint:
     name: TFLint
@@ -136,6 +110,11 @@ jobs:
       matrix:
         example:
           - default
+    env:
+      ARM_CLIENT_ID: ${{ secrets.INFOEX_SBX_CLIENT_ID }}
+      ARM_CLIENT_SECRET: ${{ secrets.INFOEX_SBX_CLIENT_SECRET }}
+      ARM_TENANT_ID: ${{ secrets.INFOEX_SBX_TENANT_ID }}
+      ARM_SUBSCRIPTION_ID: ${{ secrets.INFOEX_SBX_SUBSCRIPTION_ID }}
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
