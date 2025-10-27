@@ -1,5 +1,5 @@
 module "name" {
-  source  = "app.terraform.io/infoex/diagnostics/azurerm"
+  source  = "app.terraform.io/infoex/namer/azurerm"
   version = "0.0.1"
 
   contact     = "nobody@infoex.dev"
