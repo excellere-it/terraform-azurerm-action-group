@@ -214,7 +214,7 @@ info: ## Display project information
 	@echo "$(CYAN)Project Information$(NC)"
 	@echo "$(CYAN)========================================$(NC)"
 	@echo "$(GREEN)Module Name:$(NC) terraform-azurerm-action-group"
-	@echo "$(GREEN)Terraform Version:$(NC) >= 1.3.4"
+	@echo "$(GREEN)Terraform Version:$(NC) >= 1.13.4"
 	@echo "$(GREEN)Go Version:$(NC) >= 1.18"
 	@echo "$(GREEN)Test Directory:$(NC) $(TESTDIR)"
 	@echo "$(GREEN)Example Directory:$(NC) $(EXAMPLE_DIR)"

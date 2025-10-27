@@ -30,7 +30,7 @@ We are committed to providing a welcoming and inclusive environment. Please be r
 
 Before you begin, ensure you have the following tools installed:
 
-- [Terraform](https://www.terraform.io/downloads.html) >= 1.3.4
+- [Terraform](https://www.terraform.io/downloads.html) >= 1.13.4
 - [Go](https://golang.org/dl/) >= 1.18 (for testing)
 - [terraform-docs](https://terraform-docs.io/) (for documentation generation)
 - [Make](https://www.gnu.org/software/make/) (for automation)

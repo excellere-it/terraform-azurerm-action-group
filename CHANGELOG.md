@@ -45,7 +45,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Output for action group ID
 
 ### Supported
-- Terraform >= 1.3.4
+- Terraform >= 1.13.4
 - AzureRM provider >= 3.0.0
 - Azure Monitor Action Groups
 - Integration with terraform-terraform-namer module
