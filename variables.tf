@@ -1,3 +1,9 @@
+variable "is_global" {
+  description = "Is the resource considered a global resource"
+  type        = bool
+  default     = false
+}
+
 variable "display_name" {
   description = "The display name of the action group."
   type        = string

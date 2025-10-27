@@ -130,12 +130,12 @@
 #
 module "name" {
   source  = "app.terraform.io/infoex/namer/terraform"
-  version = "0.0.1"
+  version = "0.0.3"
 
   contact       = var.name.contact
   environment   = var.name.environment
   instance      = var.name.instance
-  location      = var.resource_group.location
+  location      = var.is_global ? "global" : var.resource_group.location
   optional_tags = var.optional_tags
   repository    = var.name.repository
   workload      = var.name.workload
