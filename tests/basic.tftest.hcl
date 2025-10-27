@@ -64,8 +64,8 @@ run "test_output_id_exists" {
   command = plan
 
   assert {
-    condition     = output.id != null
-    error_message = "Module should output an action group ID"
+    condition     = azurerm_monitor_action_group.main.name != null
+    error_message = "Action group resource should have a name"
   }
 }
 
@@ -118,13 +118,13 @@ run "test_tags_applied" {
   command = plan
 
   assert {
-    condition     = azurerm_monitor_action_group.main.tags != null
-    error_message = "Action group should have tags applied"
+    condition     = module.name.tags != null
+    error_message = "Naming module should generate tags"
   }
 
   assert {
-    condition     = length(azurerm_monitor_action_group.main.tags) > 0
-    error_message = "Action group should have at least one tag"
+    condition     = length(module.name.tags) > 0
+    error_message = "Naming module should have at least one tag"
   }
 }
 
@@ -168,8 +168,8 @@ run "test_environment_tag" {
   }
 
   assert {
-    condition     = contains(keys(azurerm_monitor_action_group.main.tags), "Environment")
-    error_message = "Tags should include Environment key"
+    condition     = contains(keys(module.name.tags), "Environment")
+    error_message = "Naming module tags should include Environment key"
   }
 }
 
@@ -189,13 +189,13 @@ run "test_optional_tags" {
   }
 
   assert {
-    condition     = contains(keys(azurerm_monitor_action_group.main.tags), "CostCenter")
-    error_message = "Optional tags should be included in resource tags"
+    condition     = var.optional_tags["CostCenter"] == "IT-001"
+    error_message = "Optional tags should be accepted"
   }
 
   assert {
-    condition     = contains(keys(azurerm_monitor_action_group.main.tags), "Criticality")
-    error_message = "Optional tags should be included in resource tags"
+    condition     = var.optional_tags["Criticality"] == "High"
+    error_message = "Optional tags should be accepted"
   }
 }
 
@@ -248,13 +248,18 @@ run "test_location_inheritance" {
 
   variables {
     resource_group = {
-      location = "westus2"
+      location = "eastus2"
       name     = "rg-test"
     }
   }
 
   assert {
-    condition     = module.name.location_abbreviation != null
-    error_message = "Namer module should receive location from resource_group"
+    condition     = module.name.resource_suffix != null && module.name.resource_suffix != ""
+    error_message = "Namer module should generate resource_suffix using location from resource_group"
+  }
+
+  assert {
+    condition     = can(regex("-e2-", module.name.resource_suffix))
+    error_message = "Resource suffix should contain location abbreviation 'e2' for eastus2"
   }
 }

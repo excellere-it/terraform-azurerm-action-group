@@ -342,3 +342,4 @@ config.local.*
 !.terraform-docs.yml
 !.editorconfig
 !.gitattributes
+.terraform.lock.hcl
