@@ -130,7 +130,7 @@
 #
 module "name" {
   source  = "app.terraform.io/infoex/namer/terraform"
-  version = "0.0.3"
+  version = "0.0.1"
 
   contact       = var.name.contact
   environment   = var.name.environment
@@ -152,4 +152,25 @@ resource "azurerm_monitor_action_group" "main" {
   resource_group_name = var.resource_group.name
   short_name          = var.display_name
   tags                = module.name.tags
+}
+
+# =============================================================================
+# Section: Diagnostics Integration (Optional)
+# =============================================================================
+# Enable diagnostic settings for Action Group alert activity audit logging
+
+module "diagnostics" {
+  count   = var.diagnostics.enabled ? 1 : 0
+  source  = "app.terraform.io/infoex/diagnostics/azurerm"
+  version = "0.0.1"
+
+  log_analytics_workspace_id = var.diagnostics.log_analytics_workspace_id
+
+  monitored_services = {
+    action_group = {
+      id      = azurerm_monitor_action_group.main.id
+      table   = var.diagnostics.destination_type
+      include = [] # Enable all available diagnostic categories
+    }
+  }
 }
