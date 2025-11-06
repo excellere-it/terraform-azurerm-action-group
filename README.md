@@ -179,103 +179,46 @@ module "example" {
 }
 ```
 
-## Required Inputs
+## Inputs
 
-The following input variables are required:
-
-### <a name="input_display_name"></a> [display\_name](#input\_display\_name)
-
-Description: The display name of the action group.
-
-Type: `string`
-
-### <a name="input_name"></a> [name](#input\_name)
-
-Description: The name tokens used to construct the resource name and tags.
-
-Type:
-
-```hcl
-object({
-    contact     = string
-    environment = string
-    instance    = optional(number)
-    program     = optional(string)
-    repository  = string
-    workload    = string
-  })
-```
-
-### <a name="input_resource_group"></a> [resource\_group](#input\_resource\_group)
-
-Description: The resource group to deploy resources into
-
-Type:
-
-```hcl
-object({
-    location = string
-    name     = string
-  })
-```
-
-## Optional Inputs
-
-The following input variables are optional (have default values):
-
-### <a name="input_expiration_days"></a> [expiration\_days](#input\_expiration\_days)
-
-Description: Used to calculate the value of the EndDate tag by adding the specified number of days to the CreateDate tag.
-
-Type: `number`
-
-Default: `365`
-
-### <a name="input_optional_tags"></a> [optional\_tags](#input\_optional\_tags)
-
-Description: A map of additional tags for the resource.
-
-Type: `map(string)`
-
-Default: `{}`
+| Name | Description | Type | Default | Required |
+|------|-------------|------|---------|:--------:|
+| <a name="input_display_name"></a> [display\_name](#input\_display\_name) | The display name of the action group. | `string` | n/a | yes |
+| <a name="input_is_global"></a> [is\_global](#input\_is\_global) | Is the resource considered a global resource | `bool` | `false` | no |
+| <a name="input_name"></a> [name](#input\_name) | The name tokens used to construct the resource name and tags. | <pre>object({<br/>    contact     = string<br/>    environment = string<br/>    instance    = optional(number)<br/>    program     = optional(string)<br/>    repository  = string<br/>    workload    = string<br/>  })</pre> | n/a | yes |
+| <a name="input_optional_tags"></a> [optional\_tags](#input\_optional\_tags) | A map of additional tags for the resource. | `map(string)` | `{}` | no |
+| <a name="input_resource_group"></a> [resource\_group](#input\_resource\_group) | The resource group to deploy resources into | <pre>object({<br/>    location = string<br/>    name     = string<br/>  })</pre> | n/a | yes |
 
 ## Outputs
 
-The following outputs are exported:
-
-### <a name="output_id"></a> [id](#output\_id)
-
-Description: The ID of the Action Group.
+| Name | Description |
+|------|-------------|
+| <a name="output_id"></a> [id](#output\_id) | The ID of the Action Group. |
 
 ## Resources
 
-The following resources are used by this module:
-
-- [azurerm_monitor_action_group.main](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/monitor_action_group) (resource)
+| Name | Type |
+|------|------|
+| [azurerm_monitor_action_group.main](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/monitor_action_group) | resource |
 
 ## Requirements
 
-The following requirements are needed by this module:
-
-- <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) (~> 1.13)
-
-- <a name="requirement_azurerm"></a> [azurerm](#requirement\_azurerm) (~> 3.47)
+| Name | Version |
+|------|---------|
+| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | ~> 1.13 |
+| <a name="requirement_azurerm"></a> [azurerm](#requirement\_azurerm) | ~> 3.47 |
 
 ## Providers
 
-The following providers are used by this module:
-
-- <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) (3.117.1)
+| Name | Version |
+|------|---------|
+| <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) | 3.117.1 |
 
 ## Modules
 
-The following Modules are called:
-
-### <a name="module_name"></a> [name](#module\_name)
-
-Source: ../terraform-terraform-namer
-
-Version:
+| Name | Source | Version |
+|------|--------|---------|
+| <a name="module_name"></a> [name](#module\_name) | app.terraform.io/infoex/namer/terraform | 0.0.3 |
 <!-- END_TF_DOCS -->
 
 ## <a name='update-docs'></a>Update Docs

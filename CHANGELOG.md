@@ -8,6 +8,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
+- **COMPLIANCE**: Diagnostic settings integration via terraform-azurerm-diagnostics module (v0.0.11)
+  - Enables Action Group audit logging for alert notification activity tracking
+  - Configurable via `diagnostics` object variable (default: disabled)
+  - Supports Dedicated or AzureDiagnostics table types
+  - Provides alert activity logs for monitoring notification delivery and action execution (SOC 2 compliance)
 - Comprehensive module header documentation in main.tf (80+ lines)
 - CONTRIBUTING.md with development workflow and guidelines
 - CHANGELOG.md for tracking version history

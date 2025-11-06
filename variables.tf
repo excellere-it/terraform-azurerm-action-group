@@ -40,3 +40,17 @@ variable "resource_group" {
     name     = string
   })
 }
+
+variable "diagnostics" {
+  description = "Diagnostic settings configuration for Action Group"
+  type = object({
+    enabled                    = bool
+    log_analytics_workspace_id = string
+    destination_type          = optional(string, "Dedicated")
+  })
+  default = {
+    enabled                    = false
+    log_analytics_workspace_id = null
+    destination_type          = "Dedicated"
+  }
+}
