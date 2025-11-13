@@ -162,7 +162,7 @@ resource "azurerm_monitor_action_group" "main" {
 module "diagnostics" {
   count   = var.diagnostics.enabled ? 1 : 0
   source  = "app.terraform.io/infoex/diagnostics/azurerm"
-  version = "0.0.3"
+  version = "0.0.4"
 
   log_analytics_workspace_id = var.diagnostics.log_analytics_workspace_id
 
