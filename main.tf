@@ -129,8 +129,7 @@
 # Uses local module reference for development and testing.
 #
 module "name" {
-  source  = "app.terraform.io/infoex/namer/terraform"
-  version = "0.0.2"
+  source = "git::https://github.com/excellere-it/terraform-namer.git"
 
   contact       = var.name.contact
   environment   = var.name.environment
@@ -161,8 +160,7 @@ resource "azurerm_monitor_action_group" "main" {
 
 module "diagnostics" {
   count   = var.diagnostics.enabled ? 1 : 0
-  source  = "app.terraform.io/infoex/diagnostics/azurerm"
-  version = "0.0.7"
+  source = "git::https://github.com/excellere-it/terraform-azurerm-diagnostics.git"
 
   log_analytics_workspace_id = var.diagnostics.log_analytics_workspace_id
 
